@@ -3,7 +3,7 @@ package ru.itpark;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class MainTryCatch {
 
     // 5^ = 0 + 1 + 2 + 3 + 4 + 5
 
