@@ -3,7 +3,7 @@ package ru.itpark;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-public class Main {
+public class MainInputStream {
 
     public static void main(String[] args) throws Exception {
         InputStream inputStream = new FileInputStream("input.txt");
