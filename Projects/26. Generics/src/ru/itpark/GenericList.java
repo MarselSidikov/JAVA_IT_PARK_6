@@ -1,4 +1,6 @@
 package ru.itpark;
 
-public class List {
+public interface GenericList<V> {
+    V get(int index);
+    void add(V value);
 }

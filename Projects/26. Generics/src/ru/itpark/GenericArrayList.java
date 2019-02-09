@@ -1,6 +1,6 @@
 package ru.itpark;
 
-public class GenericArrayList<T> {
+public class GenericArrayList<T> implements GenericList<T> {
     private T elements[];
     private int count;
 

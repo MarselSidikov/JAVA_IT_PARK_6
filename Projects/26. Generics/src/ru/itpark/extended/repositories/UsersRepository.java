@@ -1,4 +1,7 @@
 package ru.itpark.extended.repositories;
 
-public class UsersRepository {
+import ru.itpark.extended.models.User;
+
+public interface UsersRepository extends CrudRepository<User> {
+    User findByName(String name);
 }
