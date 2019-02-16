@@ -1,6 +1,4 @@
-package ru.itpark;
-
-import sun.awt.image.ImageWatched;
+package ru.itpark.simple;
 
 public class IntegerLinkedList {
     private Node top;

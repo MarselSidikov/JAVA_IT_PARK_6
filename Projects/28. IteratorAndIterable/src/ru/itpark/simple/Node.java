@@ -1,4 +1,4 @@
-package ru.itpark;
+package ru.itpark.simple;
 
 public class Node {
     private int value;
