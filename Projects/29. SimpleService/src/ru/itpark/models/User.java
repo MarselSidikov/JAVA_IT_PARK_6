@@ -1,7 +1,7 @@
 package ru.itpark.models;
 
 public class User {
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String login;
@@ -13,12 +13,20 @@ public class User {
         this.login = login;
         this.password = password;
     }
+    public User(Long id, String firstName, String lastName, String login, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.password = password;
+    }
 
-    public void setId(int id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

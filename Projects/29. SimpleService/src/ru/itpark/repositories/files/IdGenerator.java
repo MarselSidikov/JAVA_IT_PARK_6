@@ -1,9 +1,9 @@
-package ru.itpark.utils;
+package ru.itpark.repositories.files;
 
 import java.io.*;
 
 public class IdGenerator {
-    private int lastGeneratedId;
+    private Long lastGeneratedId;
     private String idSequenceFileName;
 
     public IdGenerator(String idSequenceFileName) {
@@ -12,17 +12,17 @@ public class IdGenerator {
             FileReader fileReader = new FileReader(idSequenceFileName);
             BufferedReader reader = new BufferedReader(fileReader);
             String lastGeneratedIdAsString = reader.readLine();
-            this.lastGeneratedId = Integer.parseInt(lastGeneratedIdAsString);
+            this.lastGeneratedId = Long.parseLong(lastGeneratedIdAsString);
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
-    public int generateId() {
+    public Long generateId() {
         try {
             FileWriter fileWriter = new FileWriter(idSequenceFileName);
             BufferedWriter writer = new BufferedWriter(fileWriter);
-            int result = this.lastGeneratedId;
+            Long result = this.lastGeneratedId;
             this.lastGeneratedId++;
             writer.write(String.valueOf(this.lastGeneratedId));
             writer.close();
