@@ -5,6 +5,7 @@ import ru.itpark.repositories.UsersRepository;
 import ru.itpark.repositories.files.IdGenerator;
 
 import java.io.*;
+import java.util.List;
 
 public class UsersRepositoryFilesImpl implements UsersRepository {
 
@@ -51,5 +52,10 @@ public class UsersRepositoryFilesImpl implements UsersRepository {
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    @Override
+    public List<User> findAll() {
+        return null;
     }
 }

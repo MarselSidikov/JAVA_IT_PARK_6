@@ -6,6 +6,8 @@ import ru.itpark.repositories.jdbc.DataBaseConnector;
 import ru.itpark.repositories.jdbc.UsersRepositoryJdbcImpl;
 import ru.itpark.utils.UserFromConsoleRetriever;
 
+import java.util.List;
+
 public class MainOnJdbcRepository {
     private static final String DB_USER = "postgres";
     private static final String DB_PASSWORD = "Zaq12wsx";
@@ -15,8 +17,13 @@ public class MainOnJdbcRepository {
         UserFromConsoleRetriever retriever = new UserFromConsoleRetriever();
         DataBaseConnector connector = new DataBaseConnector(DB_URL, DB_USER, DB_PASSWORD);
         UsersRepository usersRepository = new UsersRepositoryJdbcImpl(connector);
-        User user = retriever.retrieveUser();
-        usersRepository.save(user);
+        List<User> users = usersRepository.findAll();
+
+        for (User user : users) {
+            System.out.println(user);
+        }
+//        User user = retriever.retrieveUser();
+//        usersRepository.save(user);
 //        System.out.println(usersRepository.find(0L));
 //        System.out.println(usersRepository.find(1L));
 //        System.out.println(usersRepository.find(2L));

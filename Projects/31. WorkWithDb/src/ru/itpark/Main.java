@@ -3,6 +3,10 @@ package ru.itpark;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
     private static final String DB_USER = "postgres";
@@ -17,7 +21,5 @@ public class Main {
             System.out.println(resultSet.getLong("id") + " " + resultSet.getString("first_name"));
 
         }
-
-
     }
 }

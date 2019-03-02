@@ -1,21 +1,42 @@
 package ru.itpark.repositories.jdbc;
 
 import ru.itpark.models.User;
+import ru.itpark.repositories.RowMapper;
 import ru.itpark.repositories.UsersRepository;
+//import ru.itpark.repositories.UsersRowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsersRepositoryJdbcImpl implements UsersRepository {
 
     //language=SQL
     private final static String SQL_SELECT_BY_ID = "select * from service_user where id = ";
 
+    //language=SQL
+    private final static String SQL_SELECT_ALL = "select * from service_user";
+
     private DataBaseConnector connector;
+
+    private RowMapper<User> usersRowMapper = new RowMapper<User>() {
+        @Override
+        public User mapRow(ResultSet row) throws SQLException {
+            return new User(row.getLong("id"),
+                    row.getString("first_name"),
+                    row.getString("last_name"),
+                    row.getString("login"),
+                    row.getString("password"));
+        }
+    };
+
+//    private UsersRowMapper usersRowMapper;
 
     public UsersRepositoryJdbcImpl(DataBaseConnector connector) {
         this.connector = connector;
+//        this.usersRowMapper = new UsersRowMapper();
     }
 
     @Override
@@ -37,12 +58,23 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
         ResultSet result = connector.executeQuery(SQL_SELECT_BY_ID + id + ";");
         try {
             if (result.next()) {
-                return new User(result.getLong("id"),
-                        result.getString("first_name"),
-                        result.getString("last_name"),
-                        result.getString("login"),
-                        result.getString("password"));
+                return usersRowMapper.mapRow(result);
             } else return null;
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @Override
+    public List<User> findAll() {
+        ResultSet result = connector.executeQuery(SQL_SELECT_ALL);
+        List<User> users = new ArrayList<>();
+        try {
+            while (result.next()) {
+                User user = usersRowMapper.mapRow(result);
+                users.add(user);
+            }
+            return users;
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
