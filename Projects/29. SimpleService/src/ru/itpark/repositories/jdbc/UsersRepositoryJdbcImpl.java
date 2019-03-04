@@ -21,16 +21,11 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
 
     private DataBaseConnector connector;
 
-    private RowMapper<User> usersRowMapper = new RowMapper<User>() {
-        @Override
-        public User mapRow(ResultSet row) throws SQLException {
-            return new User(row.getLong("id"),
-                    row.getString("first_name"),
-                    row.getString("last_name"),
-                    row.getString("login"),
-                    row.getString("password"));
-        }
-    };
+    private RowMapper<User> usersRowMapper = row -> new User(row.getLong("id"),
+            row.getString("first_name"),
+            row.getString("last_name"),
+            row.getString("login"),
+            row.getString("password"));
 
 //    private UsersRowMapper usersRowMapper;
 
