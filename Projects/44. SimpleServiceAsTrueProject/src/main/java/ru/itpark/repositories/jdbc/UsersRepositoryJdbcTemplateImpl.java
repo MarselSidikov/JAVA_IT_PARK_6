@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.RowMapper;
 import ru.itpark.models.User;
 import ru.itpark.repositories.UsersRepository;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
@@ -30,8 +29,8 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
 
     private JdbcTemplate jdbcTemplate;
 
-    public UsersRepositoryJdbcTemplateImpl(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public UsersRepositoryJdbcTemplateImpl(JdbcTemplate template) {
+        this.jdbcTemplate = template;
     }
 
     private RowMapper<User> usersRowMapper = (row, rowNumber) ->

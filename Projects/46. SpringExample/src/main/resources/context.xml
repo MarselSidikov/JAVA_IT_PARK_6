@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="message" class="ru.itpark.SuffixMessage" scope="prototype">
+        <constructor-arg name="suffix" value="FROM SPRING"/>
+        <property name="text" value="МАРСЕЛЬ"/>
+    </bean>
+
+    <bean id="outer" class="ru.itpark.AdditionalInformationOuterDateTimeImpl">
+        <constructor-arg name="renderer" ref="rendererRed"/>
+    </bean>
+
+
+    <bean id="rendererStandard" class="ru.itpark.MessageRendererStandardImpl"/>
+    <bean id="rendererRed" class="ru.itpark.MessageRendererRedImpl"/>
+</beans>
