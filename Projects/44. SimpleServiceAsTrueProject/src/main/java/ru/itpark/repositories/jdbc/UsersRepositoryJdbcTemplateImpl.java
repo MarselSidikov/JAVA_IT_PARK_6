@@ -7,6 +7,7 @@ import ru.itpark.models.User;
 import ru.itpark.repositories.UsersRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
 
@@ -24,7 +25,7 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
     private final static String SQL_SELECT_ALL = "select * from service_user";
 
     //language=SQL
-    private final static String SQL_INSERT = "insert into service_user(first_name, last_name, login, password) " +
+    private final static String SQL_INSERT = "insert into service_user(first_name, last_name, login, password_hash) " +
             "values (?, ?, ?, ?)";
 
     private JdbcTemplate jdbcTemplate;
@@ -38,13 +39,13 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
                     .firstName(row.getString("first_name"))
             .lastName(row.getString("last_name"))
             .login(row.getString("login"))
-            .password(row.getString("password"))
+            .passwordHash(row.getString("password_hash"))
             .build();
 
     @Override
     public void save(User model) {
         jdbcTemplate.update(SQL_INSERT, model.getFirstName(), model.getLastName(), model.getLogin(),
-                model.getPassword());
+                model.getPasswordHash());
     }
 
     @Override
@@ -67,11 +68,11 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
     }
 
     @Override
-    public User findOneByLogin(String login) {
+    public Optional<User> findOneByLogin(String login) {
         try {
-            return jdbcTemplate.queryForObject(SQL_SELECT_BY_LOGIN, usersRowMapper, login);
+            return Optional.of(jdbcTemplate.queryForObject(SQL_SELECT_BY_LOGIN, usersRowMapper, login));
         } catch (EmptyResultDataAccessException e) {
-            return null;
+            return Optional.empty();
         }
     }
 
