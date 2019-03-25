@@ -28,6 +28,7 @@ public class SignInServlet extends HttpServlet {
         usersService = context.getBean(UsersService.class);
     }
 
+    @Override
     @SneakyThrows
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter writer = response.getWriter();
@@ -43,7 +44,7 @@ public class SignInServlet extends HttpServlet {
                 "\t\t<br>\n" +
                 "\t\t<input type=\"password\" name=\"password\" placeholder=\"Password\">\n" +
                 "\t\t<br>\n" +
-                "\t\t<input type=\"submit\" value=\"SignUp\">\n" +
+                "\t\t<input type=\"submit\" value=\"SignIn\">\n" +
                 "\t</form>\n" +
                 "</div>\n" +
                 "</body>");
@@ -62,7 +63,7 @@ public class SignInServlet extends HttpServlet {
             response.addCookie(cookie);
             response.sendRedirect("/hello");
         } else {
-            response.sendRedirect("/signInAndCreateCookieValue");
+            response.sendRedirect("/signIn");
         }
     }
 }

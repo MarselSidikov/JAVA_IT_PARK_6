@@ -5,11 +5,15 @@
 
     <bean id="usersService" class="ru.itpark.services.UsersServiceImpl">
         <constructor-arg name="usersRepository" ref="usersRepository"/>
+        <constructor-arg name="authRepository" ref="authRepository"/>
         <constructor-arg name="encoder" ref="passwordEncoder"/>
     </bean>
 
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
+    <bean id="authRepository" class="ru.itpark.repositories.jdbc.AuthRepositoryImpl">
+        <constructor-arg name="template" ref="jdbcTemplate"/>
+    </bean>
     <bean id="usersRepository" class="ru.itpark.repositories.jdbc.UsersRepositoryJdbcTemplateImpl">
         <constructor-arg name="template" ref="jdbcTemplate"/>
     </bean>

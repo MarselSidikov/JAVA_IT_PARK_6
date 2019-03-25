@@ -56,6 +56,6 @@ public class SignUpServlet extends HttpServlet {
                 .build();
 
         usersService.signUp(form);
-        response.sendRedirect("/signInAndCreateCookieValue");
+        response.sendRedirect("/signIn");
     }
 }
