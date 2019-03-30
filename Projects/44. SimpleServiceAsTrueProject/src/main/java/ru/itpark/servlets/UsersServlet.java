@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.itpark.models.User;
 import ru.itpark.services.UsersService;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +20,8 @@ public class UsersServlet extends HttpServlet {
     private UsersService usersService;
 
     @Override
-    public void init() throws ServletException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("ru.itpark.config\\context.xml");
+    public void init(ServletConfig config) throws ServletException {
+        ApplicationContext context = (ApplicationContext) config.getServletContext().getAttribute("springContext");
         usersService = context.getBean(UsersService.class);
     }
 

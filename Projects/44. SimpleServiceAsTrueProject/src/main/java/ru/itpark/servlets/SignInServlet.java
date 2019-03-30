@@ -24,7 +24,7 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("ru.itpark.config\\context.xml");
+        ApplicationContext context = (ApplicationContext) config.getServletContext().getAttribute("springContext");
         usersService = context.getBean(UsersService.class);
     }
 
@@ -60,8 +60,9 @@ public class SignInServlet extends HttpServlet {
         Optional<String> cookieValue = usersService.signInAndCreateCookieValue(form);
         if (cookieValue.isPresent()) {
             Cookie cookie = new Cookie("CLIENT_ID", cookieValue.get());
+            cookie.setMaxAge(60 * 60 * 24 * 365);
             response.addCookie(cookie);
-            response.sendRedirect("/hello");
+            response.sendRedirect("/users");
         } else {
             response.sendRedirect("/signIn");
         }

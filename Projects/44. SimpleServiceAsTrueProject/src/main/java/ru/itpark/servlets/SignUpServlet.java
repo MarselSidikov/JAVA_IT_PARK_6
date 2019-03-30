@@ -23,7 +23,7 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("ru.itpark.config\\context.xml");
+        ApplicationContext context = (ApplicationContext) config.getServletContext().getAttribute("springContext");
         usersService = context.getBean(UsersService.class);
     }
 
