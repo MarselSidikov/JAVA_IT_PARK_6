@@ -1,8 +1,10 @@
 package ru.itpark.repositories.jdbc;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 import ru.itpark.models.Auth;
 import ru.itpark.models.User;
 import ru.itpark.repositories.AuthRepository;
@@ -10,6 +12,7 @@ import ru.itpark.repositories.AuthRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class AuthRepositoryJdbcTemplateImpl implements AuthRepository {
 
     //language=SQL
@@ -21,6 +24,7 @@ public class AuthRepositoryJdbcTemplateImpl implements AuthRepository {
             "       join service_user u on a.user_id = u.id " +
             "where cookie_value = ?;";
 
+    @Autowired
     private JdbcTemplate template;
 
     private RowMapper<Auth> authRowMapper = (row, rowNumber) -> {
@@ -38,10 +42,6 @@ public class AuthRepositoryJdbcTemplateImpl implements AuthRepository {
 
         return auth;
     };
-
-    public AuthRepositoryJdbcTemplateImpl(JdbcTemplate template) {
-        this.template = template;
-    }
 
     @Override
     public void save(Auth model) {

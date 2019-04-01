@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/users")
 public class UsersServlet extends HttpServlet {
 
     private UsersService usersService;
@@ -29,7 +28,7 @@ public class UsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> users = usersService.getAllUsers();
         req.setAttribute("users", users);
-        req.getRequestDispatcher("WEB-INF/jsp/users.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/jsp/users_page.jsp").forward(req,resp);
     }
 
 

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/signUp")
 public class SignUpServlet extends HttpServlet {
 
     private UsersService usersService;
