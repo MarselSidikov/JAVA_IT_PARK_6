@@ -20,42 +20,6 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     private UsersRepository usersRepository;
 
-    @Autowired
-    private AuthRepository authRepository;
-
-    @Autowired
-    private PasswordEncoder encoder;
-
-    @Override
-    public void signUp(AuthUserForm form) {
-        String passwordHash = encoder.encode(form.getPassword());
-
-        User newUser = User.builder()
-                .login(form.getLogin())
-                .passwordHash(passwordHash)
-                .build();
-
-        usersRepository.save(newUser);
-    }
-
-    @Override
-    public Optional<String> signInAndCreateCookieValue(AuthUserForm form) {
-        Optional<User> userCandidate = usersRepository.findOneByLogin(form.getLogin());
-        if (userCandidate.isPresent()) {
-            User user = userCandidate.get();
-            if (encoder.matches(form.getPassword(), user.getPasswordHash())) {
-                String value = UUID.randomUUID().toString();
-                Auth auth = Auth.builder()
-                        .user(user)
-                        .value(value)
-                        .build();
-                authRepository.save(auth);
-                return Optional.of(value);
-            }
-        }
-        return Optional.empty();
-    }
-
     @Override
     public List<User> getAllUsers() {
         return usersRepository.findAll();
