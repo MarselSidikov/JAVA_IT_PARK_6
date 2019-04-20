@@ -16,7 +16,7 @@
     function message(query) {
         $.ajax({
             method: "GET",
-            url: '/search?q=' + query
+            url: '/users/search.json?q=' + query
         }).done(function (response) {
             let resultPlace = document.getElementById('result');
             let resultString = '<table>';

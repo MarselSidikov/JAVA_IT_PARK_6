@@ -9,14 +9,23 @@
 </head>
 <body>
 <div>
+    <a href="?sort=true&by=age">По возрастанию возраста</a>
+    <a href="?sort=true&by=id">По возрастанию id</a>
+    <a href="?sort=true&by=age&desc=true">По убыванию возраста</a>
+    <a href="?sort=true&by=id&desc=true">По убыванию id</a>
+    <a href="?">Все</a>
+</div>
+<div>
     <table>
         <tr>
+            <th>ID</th>
             <th>Имя</th>
             <th>Фамилия</th>
             <th>Возраст</th>
         </tr>
     <#list users as user>
         <tr>
+            <td>${user.id}</td>
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.age}</td>
