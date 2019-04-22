@@ -1,6 +1,7 @@
 package ru.itpark.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class UsersController {
     private UsersService usersService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getUsersPage(@RequestParam(value = "sort", required = false) Boolean sort,
                                @RequestParam(value = "by", required = false) String by,
                                @RequestParam(value = "desc", required = false) Boolean desc,
@@ -30,11 +32,13 @@ public class UsersController {
     }
 
     @GetMapping("/search")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getSearchPage() {
         return "users_search";
     }
 
     @GetMapping("/search.json")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseBody
     public List<User> getUsersByKeyword(@RequestParam("q") String query) {
         return usersService.getUsersWithSearch(query);

@@ -1,6 +1,7 @@
 package ru.itpark.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class ProductsController {
     private ProductsService productsService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER')")
     public String getProductsPage(ModelMap model) {
         List<Product> products = productsService.getProducts();
         model.addAttribute("products", products);
@@ -24,12 +26,14 @@ public class ProductsController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('USER')")
     public String addProduct(Product product) {
         productsService.add(product);
         return "redirect:/products";
     }
 
     @PostMapping("/ajax")
+    @PreAuthorize("hasAuthority('USER')")
     @ResponseBody
     public List<Product> addProductFromJson(@RequestBody Product product) {
         productsService.add(product);

@@ -21,14 +21,12 @@
             <th>ID</th>
             <th>Имя</th>
             <th>Фамилия</th>
-            <th>Возраст</th>
         </tr>
     <#list users as user>
         <tr>
             <td>${user.id}</td>
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
-            <td>${user.age}</td>
         </tr>
     </#list>
     </table>
