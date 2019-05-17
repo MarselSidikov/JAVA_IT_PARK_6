@@ -11,7 +11,8 @@ public class Producer extends Thread {
     public void run() {
         while (true) {
             synchronized (product) {
-                while (!product.isConsumed()) {
+                // пока продукт не употреблен
+                if (!product.isConsumed()) {
                     System.out.println("Producer waiting");
                     // передаем управление другим потокам
                     // мы будем ждать на product, пока другой поток

@@ -1,26 +1,26 @@
 package ru.itpark;
 
 public class Product {
-    private boolean status = false;
+    private boolean isReady = false;
 
     // готовность продукта
-    public boolean isReady() {
-        return status;
+    public boolean isProduced() {
+        return isReady;
     }
 
     // был ли он использован
-    // если продукт готов - то он не использовался
-    // если продукт не готов - то он использован
+    // не использован - если продукт готов
+    // использован - если не готов
     public boolean isConsumed() {
-        return !status;
+        return !isReady;
     }
 
     public void produce() {
-        this.status = true;
+        this.isReady = true;
     }
 
     public void consume() {
-        this.status = false;
+        this.isReady = false;
     }
 
 }

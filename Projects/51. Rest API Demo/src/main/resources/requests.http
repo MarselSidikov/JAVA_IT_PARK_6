@@ -1,7 +1,20 @@
+POST http://localhost/login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "login" : "marsel",
+  "password": "qwerty007"
+}
+
+###
+
 POST http://localhost/products
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
+AUTH: 945cbc6c-e5d7-47c2-9438-665aaa9204f8
 
 {
   "name": "Молоко",

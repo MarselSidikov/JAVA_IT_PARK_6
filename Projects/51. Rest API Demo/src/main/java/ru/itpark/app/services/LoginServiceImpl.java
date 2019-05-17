@@ -1,6 +1,7 @@
 package ru.itpark.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UsersRepository usersRepository;
 
+    @Value("${token.expired}")
+    private Integer expiredSecondsForToken;
+
     @Override
     public TokenDto login(LoginDto loginData) {
         Optional<User> userCandidate = usersRepository.findFirstByLoginIgnoreCase(loginData.getLogin());
@@ -37,7 +41,7 @@ public class LoginServiceImpl implements LoginService {
                 String value = UUID.randomUUID().toString();
                 Token token = Token.builder()
                         .createdAt(LocalDateTime.now())
-                        .expiredDateTime(LocalDateTime.now().plusSeconds(30))
+                        .expiredDateTime(LocalDateTime.now().plusSeconds(expiredSecondsForToken))
                         .value(value)
                         .user(user)
                         .build();
