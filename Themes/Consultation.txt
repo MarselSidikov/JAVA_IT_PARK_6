@@ -1,0 +1,72 @@
+Анастасия----------------------------
+Модель А (а, б, в)
+*
+|
+V
+Модель B (А, г, д, е)
+*
+|
+V
+Модель С (В, ж, з, и)
+
+copy(A source, A target) {
+	sourse(а, б, в) -> target(а, б, в)
+	foreach(source.bs -> b) {
+		b -> target.bs
+		foreach(b.cs -> c) {
+			
+		}
+	}
+}
+
+Ринат--------------------------------
+1) Купить сервер на Linux
+2) Получить ssh-доступ
+3) Зайти из под рут, скачать git, скачать maven, скачать oracle-jdk
+4) Установить туда postgres, создать базу
+5) Скачать через git ваш проект, собрать через maven.
+6) Запустить screen
+7) Внутри screen запустить приложение
+8) Выйти из screen
+java -jar app.jar
+
+Александр----------------------------
+ @GetMapping("/search.json")
+    @PreAuthorize("permitAll()")
+    @ResponseBody
+    public List<Guest> getUsersByKeyword(@RequestParam("q") String query, @RequestParam("type") String type) {
+		if (type.equals("DateTime") {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+			LocalDateTime ldt = LocalDateTime.parse(query, formatter);
+			return guestService.getUsersWithSearch(ldt);
+		} else {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate ld = LocalDate.parse(query, formatter);
+			return guestService.getUsersWithSearchByDate(ld);
+		}
+        
+    }
+
+Игорь -------------------------------
+https://learn.javascript.ru/xhr-longpoll
+
+User
+
+@OneToMany(mappedBy = "to")
+List<Message> input;
+
+@OneToMany(mappedBy = "from")
+List<Message> output;
+
+Message
+	Strin text;
+	
+	@ManyToOne
+	@JoinColumn(name = "from_user_id")
+	User from;
+	
+	@ManyToOne
+	@JoinColumn(name = "to_user_id")
+	User to;
+	
+	LocalDateTime dateTime;
